@@ -238,15 +238,6 @@
             color: #ffb0c2;
         }
 
-        .again {
-            margin-top: 20px;
-            background: transparent;
-            border: 1px solid #ffffff30;
-            color: white;
-            padding: 11px 20px;
-            font-size: 13px;
-        }
-
         /* ANIMACIONES */
 
         .confetti {
@@ -445,10 +436,6 @@
         <!-- CONFIRMACION -->
 
         <div class="chosen" id="chosen"></div>
-
-        <button class="again" id="replay">
-            Volver a ver la pregunta
-        </button>
 
     </section>
 
@@ -651,31 +638,6 @@
             encodeURIComponent(message);
 
         window.location.href = whatsappURL;
-
-    });
-
-    // VOLVER A EMPEZAR
-
-    document.getElementById("replay").addEventListener("click", function() {
-
-        success.style.display = "none";
-
-        question.style.display = "block";
-
-        dateForm.style.display = "block";
-
-        dateForm.reset();
-
-        chosen.style.display = "none";
-
-        no.style.left = "58%";
-
-        no.style.top = "34px";
-
-        dodges = 0;
-
-        hint.textContent =
-            "Pista: hay una opción que está deseando que la elijas.";
 
     });
 
