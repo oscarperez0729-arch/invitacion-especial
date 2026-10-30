@@ -1,0 +1,729 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#10131d">
+
+    <title>Una invitación especial 💗</title>
+
+    <style>
+        :root {
+            --bg: #10131d;
+            --card: #191e2b;
+            --pink: #ff6f91;
+            --pink2: #ff9db2;
+            --text: #f7f4ef;
+            --muted: #aeb4c2;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 22px;
+
+            background:
+                radial-gradient(ellipse at 15% 10%, #3b2948, transparent 38%),
+                radial-gradient(ellipse at 90% 85%, #263a4a, transparent 34%),
+                var(--bg);
+
+            color: var(--text);
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .card {
+            width: min(100%, 520px);
+            min-height: 570px;
+            padding: 42px 30px 30px;
+
+            border: 1px solid #ffffff17;
+            border-radius: 28px;
+
+            background: linear-gradient(145deg, #202637, #171c28);
+
+            box-shadow: 0 28px 90px #0008;
+
+            position: relative;
+            text-align: center;
+        }
+
+        .eyebrow {
+            font-size: 11px;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--pink2);
+            font-weight: bold;
+        }
+
+        .spark {
+            font-size: 42px;
+            margin: 28px auto 18px;
+        }
+
+        h1 {
+            font-family: Georgia, serif;
+            font-weight: 500;
+            font-size: clamp(32px, 7vw, 46px);
+            line-height: 1.12;
+            margin: 0 auto 15px;
+        }
+
+        .sub {
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.65;
+            max-width: 360px;
+            margin: 0 auto;
+        }
+
+        /* BOTONES PRINCIPALES */
+
+        .stage {
+            height: 130px;
+            position: relative;
+            margin: 30px auto 8px;
+            max-width: 360px;
+        }
+
+        button {
+            border: 0;
+            border-radius: 999px;
+            padding: 15px 29px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #yes {
+            position: absolute;
+            left: 18%;
+            top: 34px;
+
+            background: linear-gradient(135deg, var(--pink), #ff8d9f);
+            color: #24131a;
+
+            box-shadow: 0 9px 26px #ff6f9145;
+        }
+
+        #no {
+            position: absolute;
+            left: 58%;
+            top: 34px;
+
+            background: #303849;
+            color: white;
+            border: 1px solid #ffffff18;
+        }
+
+        #yes:hover {
+            transform: scale(1.05);
+        }
+
+        .hint {
+            font-size: 12px;
+            color: #8992a4;
+            margin-top: 4px;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 22px;
+            left: 0;
+            right: 0;
+
+            color: #697386;
+            font-size: 11px;
+            letter-spacing: .08em;
+        }
+
+        /* SEGUNDA PANTALLA */
+
+        .success {
+            display: none;
+            animation: appear .7s ease both;
+        }
+
+        .success h1 {
+            color: #ffb0c2;
+        }
+
+        .big-heart {
+            font-size: 66px;
+            margin: 22px 0 10px;
+            animation: beat 1s infinite;
+        }
+
+        .date-card {
+            margin: 23px auto 0;
+            padding: 20px;
+
+            border: 1px solid #ffffff20;
+            border-radius: 18px;
+
+            background: #ffffff08;
+
+            max-width: 360px;
+            text-align: left;
+        }
+
+        .date-card strong {
+            display: block;
+            text-align: center;
+            font-family: Georgia, serif;
+            font-size: 22px;
+            font-weight: 500;
+            margin-bottom: 18px;
+        }
+
+        .date-card label {
+            display: block;
+            color: #d9deea;
+            font-size: 12px;
+            margin: 13px 0 7px;
+        }
+
+        .date-card input,
+        .date-card select {
+            width: 100%;
+            padding: 12px;
+
+            border: 1px solid #ffffff24;
+            border-radius: 11px;
+
+            background: #222b3b;
+            color: white;
+            font-size: 14px;
+            color-scheme: dark;
+        }
+
+        .submit-date {
+            display: block;
+            width: 100%;
+            margin-top: 19px;
+
+            background: linear-gradient(135deg, var(--pink), #ff9db2);
+            color: #24131a;
+        }
+
+        .form-note {
+            text-align: center;
+            color: #929bad;
+            font-size: 11px;
+            line-height: 1.5;
+            margin-top: 13px;
+        }
+
+        .chosen {
+            display: none;
+            margin: 18px auto 0;
+            padding: 17px;
+
+            border-radius: 16px;
+            background: #ff6f9118;
+            border: 1px solid #ff9db255;
+
+            max-width: 360px;
+            line-height: 1.6;
+        }
+
+        .chosen strong {
+            color: #ffb0c2;
+        }
+
+        .again {
+            margin-top: 20px;
+            background: transparent;
+            border: 1px solid #ffffff30;
+            color: white;
+            padding: 11px 20px;
+            font-size: 13px;
+        }
+
+        /* ANIMACIONES */
+
+        .confetti {
+            position: fixed;
+            top: -20px;
+            width: 8px;
+            height: 12px;
+            z-index: 5;
+            pointer-events: none;
+
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(720deg);
+                opacity: .2;
+            }
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(16px) scale(.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        @keyframes beat {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.13);
+            }
+        }
+
+        @media(max-width: 420px) {
+            .card {
+                padding: 35px 20px 30px;
+                min-height: 550px;
+            }
+
+            .stage {
+                max-width: 310px;
+            }
+
+            #yes {
+                left: 9%;
+            }
+
+            #no {
+                left: 55%;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+<main class="card">
+
+    <!-- PRIMERA PANTALLA -->
+
+    <section id="question">
+
+        <div class="eyebrow">
+            Tengo algo que preguntarte
+        </div>
+
+        <div class="spark">✦</div>
+
+        <h1>
+            ¿Me dejarías invitarte a una cita?
+        </h1>
+
+        <p class="sub">
+            Prometo buena conversación, muchas risas
+            y un plan que podamos recordar.
+            ¿Qué dices?
+        </p>
+
+        <div class="stage" id="stage">
+
+            <button id="yes">
+                ¡SÍ! ♥
+            </button>
+
+            <button id="no">
+                No 🙈
+            </button>
+
+        </div>
+
+        <div class="hint" id="hint">
+            Pista: hay una opción que está deseando que la elijas.
+        </div>
+
+    </section>
+
+    <!-- SEGUNDA PANTALLA -->
+
+    <section class="success" id="success">
+
+        <div class="eyebrow">
+            Sabía que había una posibilidad ✨
+        </div>
+
+        <div class="big-heart">
+            💗
+        </div>
+
+        <h1>
+            ¡Entonces tenemos una cita!
+        </h1>
+
+        <p class="sub">
+            Me acabas de alegrar el día.
+            Ahora tú tienes el control:
+            elige el día y la hora que mejor te queden.
+            Yo me encargo de la sorpresa. 😉
+        </p>
+
+        <!-- FORMULARIO DE LA CITA -->
+
+        <form class="date-card" id="dateForm">
+
+            <strong>
+                ¿Cuándo hacemos realidad esta cita?
+            </strong>
+
+            <label for="date">
+                El día que te quede perfecto
+            </label>
+
+            <input
+                type="date"
+                id="date"
+                required
+            >
+
+            <label for="time">
+                ¿A qué hora nos vemos?
+            </label>
+
+            <input
+                type="time"
+                id="time"
+                required
+            >
+
+            <label for="plan">
+                ¿Qué plan te provoca?
+            </label>
+
+            <select id="plan">
+
+                <option value="Sorpréndeme">
+                    Sorpréndeme ✨
+                </option>
+
+                <option value="Café y conversación">
+                    Café y conversación ☕
+                </option>
+
+                <option value="Una cena rica">
+                    Una cena rica 🍽️
+                </option>
+
+                <option value="Un paseo juntos">
+                    Un paseo juntos 🌆
+                </option>
+
+                <option value="Algo divertido">
+                    Algo divertido 🎡
+                </option>
+
+            </select>
+
+            <button class="submit-date" type="submit">
+                Enviar mi respuesta por WhatsApp 💬
+            </button>
+
+            <p class="form-note">
+                Tu respuesta se abrirá en WhatsApp para que puedas enviarla.
+            </p>
+
+        </form>
+
+        <!-- CONFIRMACION -->
+
+        <div class="chosen" id="chosen"></div>
+
+        <button class="again" id="replay">
+            Volver a ver la pregunta
+        </button>
+
+    </section>
+
+    <div class="footer">
+        HECHO CON UN POQUITO DE VALENTÍA
+    </div>
+
+</main>
+
+<script>
+
+    // ELEMENTOS DE LA PAGINA
+
+    const no = document.getElementById("no");
+
+    const yes = document.getElementById("yes");
+
+    const stage = document.getElementById("stage");
+
+    const hint = document.getElementById("hint");
+
+    const question = document.getElementById("question");
+
+    const success = document.getElementById("success");
+
+    const dateForm = document.getElementById("dateForm");
+
+    const chosen = document.getElementById("chosen");
+
+    const dateInput = document.getElementById("date");
+
+    // EVITAR FECHAS ANTERIORES A HOY
+
+    const today = new Date();
+
+    const yyyy = today.getFullYear();
+
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+
+    const dd = String(today.getDate()).padStart(2, "0");
+
+    dateInput.min = `${yyyy}-${mm}-${dd}`;
+
+    // MOVIMIENTO DEL BOTON NO
+
+    let dodges = 0;
+
+    function moveNo() {
+
+        const area = stage.getBoundingClientRect();
+
+        const btn = no.getBoundingClientRect();
+
+        const maxX = Math.max(0, area.width - btn.width);
+
+        const maxY = Math.max(0, area.height - btn.height);
+
+        let x, y;
+
+        let tries = 0;
+
+        do {
+
+            x = Math.random() * maxX;
+
+            y = Math.random() * maxY;
+
+            tries++;
+
+        } while (
+            tries < 20 &&
+            Math.abs(x - yes.offsetLeft) < 115 &&
+            Math.abs(y - yes.offsetTop) < 65
+        );
+
+        no.style.left = x + "px";
+
+        no.style.top = y + "px";
+
+        dodges++;
+
+        if (dodges < 3) {
+
+            hint.textContent = "¡Uy! Ese botón tiene mucha prisa 😅";
+
+        } else {
+
+            hint.textContent = "Creo que ese botón no quiere colaborar… 😂";
+
+        }
+
+    }
+
+    no.addEventListener("pointerenter", moveNo);
+
+    no.addEventListener("touchstart", function(event) {
+
+        event.preventDefault();
+
+        moveNo();
+
+    }, { passive: false });
+
+    no.addEventListener("click", function(event) {
+
+        event.preventDefault();
+
+        moveNo();
+
+    });
+
+    // AL PRESIONAR SI
+
+    yes.addEventListener("click", function() {
+
+        question.style.display = "none";
+
+        success.style.display = "block";
+
+        confetti();
+
+    });
+
+    // PROCESAR FECHA Y HORA
+
+    dateForm.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        if (!dateForm.reportValidity()) return;
+
+        const dateValue = new Date(dateInput.value + "T12:00:00");
+
+        const prettyDate = new Intl.DateTimeFormat("es-CO", {
+
+            weekday: "long",
+
+            day: "numeric",
+
+            month: "long",
+
+            year: "numeric"
+
+        }).format(dateValue);
+
+        const timeValue = document.getElementById("time").value;
+
+        const [hours, minutes] = timeValue.split(":").map(Number);
+
+        const prettyTime = new Intl.DateTimeFormat("es-CO", {
+
+            hour: "numeric",
+
+            minute: "2-digit",
+
+            hour12: true
+
+        }).format(new Date(2000, 0, 1, hours, minutes));
+
+        const plan = document.getElementById("plan").value;
+
+        // MOSTRAR RESULTADO
+
+        const strong = document.createElement("strong");
+
+        strong.textContent = "¡Trato hecho! 💞";
+
+        const details = document.createElement("p");
+
+        details.textContent =
+            `Tu propuesta: ${prettyDate} a las ${prettyTime}. Plan: ${plan}.`;
+
+        const note = document.createElement("p");
+
+        note.textContent =
+            "Ahora falta que lo confirmemos juntos. ¡Qué ilusión!";
+
+        chosen.replaceChildren(strong, details, note);
+
+        chosen.style.display = "block";
+
+        dateForm.style.display = "none";
+
+        confetti();
+
+        const whatsappNumber = "573118449523";
+
+        const message =
+            "¡Hola! 💗 Dije que SÍ a tu invitación.\n\n" +
+            "Tengo disponibilidad:\n\n" +
+            "📅 Día: " + prettyDate + "\n" +
+            "🕒 Hora: " + prettyTime + "\n" +
+            "✨ Plan: " + plan + "\n\n" +
+            "¡Espero que tengamos una cita muy bonita! 💕";
+
+        const whatsappURL =
+            "https://wa.me/" +
+            whatsappNumber +
+            "?text=" +
+            encodeURIComponent(message);
+
+        window.location.href = whatsappURL;
+
+    });
+
+    // VOLVER A EMPEZAR
+
+    document.getElementById("replay").addEventListener("click", function() {
+
+        success.style.display = "none";
+
+        question.style.display = "block";
+
+        dateForm.style.display = "block";
+
+        dateForm.reset();
+
+        chosen.style.display = "none";
+
+        no.style.left = "58%";
+
+        no.style.top = "34px";
+
+        dodges = 0;
+
+        hint.textContent =
+            "Pista: hay una opción que está deseando que la elijas.";
+
+    });
+
+    // ANIMACION DE CONFETI
+
+    function confetti() {
+
+        const colors = [
+            "#ff6f91",
+            "#ffd166",
+            "#9be7ff",
+            "#c7a6ff",
+            "#ffffff"
+        ];
+
+        for (let i = 0; i < 75; i++) {
+
+            const piece = document.createElement("i");
+
+            piece.className = "confetti";
+
+            piece.style.left = Math.random() * 100 + "vw";
+
+            piece.style.background =
+                colors[Math.floor(Math.random() * colors.length)];
+
+            piece.style.borderRadius =
+                Math.random() > 0.5 ? "50%" : "2px";
+
+            piece.style.animationDuration =
+                (2.4 + Math.random() * 2.5) + "s";
+
+            piece.style.animationDelay =
+                (Math.random() * 0.7) + "s";
+
+            document.body.appendChild(piece);
+
+            setTimeout(function() {
+
+                piece.remove();
+
+            }, 5500);
+
+        }
+
+    }
+
+</script>
+
+</body>
+</html>
