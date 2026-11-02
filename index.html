@@ -191,6 +191,23 @@
             margin-bottom: 5px;
         }
 
+        .surprise {
+            margin: 18px auto 0;
+            padding: 18px;
+            border: 1px solid #ffffff20;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #ffffff0d, #ff6f9118);
+            color: #f7e8ee;
+            line-height: 1.55;
+        }
+
+        .surprise strong {
+            display: block;
+            margin-bottom: 6px;
+            color: #ffd5e3;
+            font-size: 17px;
+        }
+
         .date-card strong {
             display: block;
             text-align: center;
@@ -389,6 +406,13 @@
             ¿Dónde te recojo?
         </div>
 
+        <div class="surprise">
+            <strong>El plan es una sorpresa ✨</strong>
+            No tienes que elegir nada.
+            Solo ven con ganas de pasarla bonito…
+            lo demás déjamelo a mí. 😉
+        </div>
+
         <!-- FORMULARIO DE LA CITA -->
 
         <form class="date-card" id="dateForm">
@@ -408,36 +432,8 @@
                 required
             >
 
-            <label for="plan">
-                ¿Qué plan te provoca?
-            </label>
-
-            <select id="plan">
-
-                <option value="Sorpréndeme">
-                    Sorpréndeme ✨
-                </option>
-
-                <option value="Café y conversación">
-                    Café y conversación ☕
-                </option>
-
-                <option value="Una cena rica">
-                    Una cena rica 🍽️
-                </option>
-
-                <option value="Un paseo juntos">
-                    Un paseo juntos 🌆
-                </option>
-
-                <option value="Algo divertido">
-                    Algo divertido 🎡
-                </option>
-
-            </select>
-
             <button class="submit-date" type="submit">
-                Enviar mi respuesta por WhatsApp 💬
+                Confirmar dónde te recojo 💬
             </button>
 
             <p class="form-note">
@@ -558,7 +554,7 @@
 
     });
 
-    // PROCESAR LUGAR Y PLAN
+    // PROCESAR LUGAR
 
     dateForm.addEventListener("submit", function(event) {
 
@@ -582,7 +578,6 @@
 
         const prettyTime = "5:30 p. m.";
 
-        const plan = document.getElementById("plan").value;
         const pickup = document.getElementById("pickup").value.trim();
 
         // MOSTRAR RESULTADO
@@ -594,7 +589,7 @@
         const details = document.createElement("p");
 
         details.textContent =
-            `Nos vemos hoy a las ${prettyTime}. Te recojo en: ${pickup}. Plan: ${plan}.`;
+            `Nos vemos hoy a las ${prettyTime}. Te recojo en: ${pickup}. El plan es sorpresa.`;
 
         const note = document.createElement("p");
 
@@ -619,9 +614,9 @@
 
             "🕒 Hora: " + prettyTime + "\n" +
 
-            "📍 Lugar para recogerte: " + pickup + "\n" +
+            "📍 Lugar para recogerte: " + pickup + "\n\n" +
 
-            "✨ Plan: " + plan + "\n\n" +
+            "🎁 El plan es una sorpresa.\n\n" +
 
             "¡Nos vemos hoy!";
 
